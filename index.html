@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Happy Birthday Zainab!</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif}
+
+/* ══ PAGE SYSTEM ══ */
+.page{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .5s ease
+}
+.page.active{opacity:1;pointer-events:all}
+.page.exit{opacity:0;pointer-events:none}
+
+/* ══ PAGE 1 & 2 — pink heart bg ══ */
+#p1,#p2{background:#fce8ea}
+
+/* heart watermark */
+.heart-bg{position:absolute;inset:0;pointer-events:none;z-index:0;width:100%;height:100%}
+
+/* floating hearts */
+.fh{position:absolute;font-size:1rem;color:#e8a0b0;animation:floatUp linear infinite;opacity:0;user-select:none}
+@keyframes floatUp{
+  0%{transform:translateY(100vh);opacity:.7}
+  100%{transform:translateY(-10vh);opacity:0}
+}
+
+/* ══ TYPING TEXT ══ */
+.type-txt{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(1.3rem,5vw,1.9rem);
+  color:#c0392b;text-align:center;line-height:1.6;
+  min-height:3.8em;position:relative;z-index:2
+}
+.cblink{
+  display:inline-block;width:2px;height:1em;
+  background:#c0392b;animation:blink .7s step-end infinite;
+  vertical-align:text-bottom;margin-left:1px
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ══ BUTTONS ══ */
+.btn-row{display:flex;gap:16px;opacity:0;transition:opacity .5s;position:relative;z-index:2}
+.pbtn{
+  padding:11px 40px;border:none;border-radius:50px;
+  font-family:'Nunito',sans-serif;font-weight:900;font-size:1.05rem;
+  letter-spacing:1.5px;text-transform:uppercase;color:#fff;
+  background:#b83428;box-shadow:0 4px 0 #7a1f15;
+  cursor:pointer;transition:transform .1s,box-shadow .1s
+}
+.pbtn:active{transform:translateY(3px);box-shadow:0 1px 0 #7a1f15}
+.pbtn:hover{background:#9e2a1f}
+
+/* ══ CHARACTER IMAGE WRAPPER ══ */
+.chars-wrap{
+  position:relative;z-index:2;
+  display:flex;align-items:flex-end;justify-content:center;
+  gap:0;
+}
+
+/* ══ WRAP ══ */
+.pw{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;
+  gap:12px;padding:12px 16px
+}
+
+/* ══ PAGE 3 — blue stripes ══ */
+#p3{
+  background:#d6eef8;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.55) 0px,
+      rgba(255,255,255,.55) 18px,
+      transparent 18px,
+      transparent 36px
+    )
+}
+.bday-title{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(2.5rem,10vw,4.8rem);
+  color:#e91e8c;text-align:center;line-height:1.1;
+  text-shadow:2px 2px 0 #fff;
+  animation:pulse 2s ease-in-out infinite;
+  position:relative;z-index:2
+}
+.star-d{position:absolute;color:#e8a0c0;font-size:1.2rem;animation:twinkle 1.6s ease-in-out infinite;z-index:1}
+.clickme-btn{
+  background:rgba(255,255,255,.85);border:2.5px solid #e91e8c;border-radius:50px;
+  padding:10px 30px;color:#c0145e;
+  font-family:'Nunito',sans-serif;font-weight:900;font-size:.88rem;letter-spacing:1px;
+  cursor:pointer;animation:hbeat 1.3s ease-in-out infinite;position:relative;z-index:2
+}
+.clickme-btn:hover{background:#e91e8c;color:#fff}
+
+/* ══ PAGE 4 — final card ══ */
+#p4{
+  background:linear-gradient(135deg,#fce4ec 0%,#f8bbd0 35%,#e1bee7 70%,#f3e5f5 100%);
+  overflow-y:auto;
+  overflow-x:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.final-wrap{
+  position:relative;z-index:2;width:100%;
+  display:flex;flex-direction:column;align-items:center;
+  padding:20px 16px 30px;
+  min-height:100%;
+}
+.fc{
+  background:#fff;border-radius:24px;
+  padding:16px 18px 20px;
+  max-width:380px;width:100%;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  box-shadow:0 12px 40px rgba(233,30,140,.15);text-align:center;
+  position:relative;
+}
+.av-ring{
+  width:72px;height:72px;border-radius:50%;
+  border:3px solid #f8bbd0;background:#fce4ec;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(233,30,140,.2);
+  overflow:hidden;margin-bottom:4px;
+}
+.av-ring img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.only-tag{
+  font-size:.68rem;font-weight:700;color:#9b59b6;
+  letter-spacing:1.2px;text-transform:uppercase;
+  border:1px solid #e8b4f0;border-radius:20px;padding:3px 12px
+}
+.fc-title{font-size:1.5rem;font-weight:900;color:#4a235a;margin-top:2px}
+.fc-sub{font-family:'Dancing Script',cursive;font-size:1.2rem;color:#e91e8c;margin-top:-4px}
+.divider{
+  width:100%;display:flex;align-items:center;gap:8px;
+  color:#c0a0cc;font-size:.75rem;margin:2px 0;
+}
+.divider::before,.divider::after{content:'';flex:1;border-top:1px dashed #e8b4f0}
+.fc-msg{font-size:.8rem;color:#555;line-height:1.72;text-align:center;padding:0 2px}
+.flower-c{position:fixed;font-size:2rem;opacity:.45;animation:sway 3s ease-in-out infinite;pointer-events:none}
+
+/* ══ CONFETTI ══ */
+#cnv{position:fixed;inset:0;pointer-events:none;z-index:9999;display:none}
+
+/* ══ KEYFRAMES ══ */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatSlow{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes wobble{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@keyframes hbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.1)}28%{transform:scale(1)}42%{transform:scale(1.08)}}
+@keyframes twinkle{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.4) rotate(20deg)}}
+@keyframes sway{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════
+     PAGE 1 — INTRO + YES/NO
+════════════════════════════ -->
+<div id="p1" class="page active">
+
+  <!-- pink heart watermark -->
+  <svg class="heart-bg" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid meet">
+    <path d="M200 330 C130 285 40 230 40 140 C40 90 75 55 115 68 C145 78 200 110 200 110
+             C200 110 255 78 285 68 C325 55 360 90 360 140 C360 230 270 285 200 330Z"
+          fill="#f5b8c0" opacity=".35"/>
+  </svg>
+  <div id="fhc" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0"></div>
+
+  <div class="pw">
+    <!-- typing text -->
+    <div class="type-txt" id="tbox"></div>
+
+    <!-- First screen image — Dudu & Bubu sitting together facing each other -->
+    <div class="chars-wrap">
+      <img
+        src="fisrt screen.webp"
+        alt="Dudu and Bubu"
+        style="width:min(280px,80vw);height:auto;animation:float 3s ease-in-out infinite;position:relative;z-index:2;filter:drop-shadow(0 8px 16px rgba(0,0,0,.12))"
+      />
+    </div>
+
+    <!-- YES / NO buttons -->
+    <div class="btn-row" id="brow">
+      <button class="pbtn" onclick="goTo('mcq1')">YES</button>
+      <button class="pbtn" id="noBtn" onmouseenter="runAway(event)" onclick="goTo('p2')">NO</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     PAGE 2 — WHY DID U CLICK NO
+════════════════════════════ -->
+<div id="p2" class="page">
+
+  <svg class="heart-bg" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid meet">
+    <!-- pink background outside heart -->
+    <rect width="400" height="380" fill="#fce8ea"/>
+    <!-- white heart so GIF white blends in -->
+    <path d="M200 330 C130 285 40 230 40 140 C40 90 75 55 115 68 C145 78 200 110 200 110
+             C200 110 255 78 285 68 C325 55 360 90 360 140 C360 230 270 285 200 330Z"
+          fill="#ffffff" opacity=".9"/>
+  </svg>
+
+  <div id="fhc2" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0"></div>
+
+  <div class="pw">
+    <div style="font-family:'Dancing Script',cursive;font-size:clamp(1.5rem,6vw,2rem);color:#c0392b;text-align:center;position:relative;z-index:2">
+      Why did u click no!
+    </div>
+
+    <!-- The GIF — white background blends into white heart -->
+    <div style="position:relative;z-index:2">
+      <img
+        src="second screen if select no.gif"
+        alt="Why did you click no"
+        style="width:min(240px,75vw);height:auto;"
+      />
+    </div>
+
+    <button class="pbtn" onclick="goBackToMcq()" style="position:relative;z-index:2">TRY AGAIN</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     MCQ 1 — Khushi ho ap?
+     CORRECT = YES → next
+     WRONG   = NO  → why no → restart
+════════════════════════════ -->
+<div id="mcq1" class="page">
+  <svg class="heart-bg" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid meet">
+    <path d="M200 330 C130 285 40 230 40 140 C40 90 75 55 115 68 C145 78 200 110 200 110
+             C200 110 255 78 285 68 C325 55 360 90 360 140 C360 230 270 285 200 330Z"
+          fill="#f5b8c0" opacity=".35"/>
+  </svg>
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0" id="fhc_m1"></div>
+
+  <div class="pw">
+    <img src="fisrt screen.webp" alt="Dudu Bubu"
+         style="width:min(220px,65vw);height:auto;animation:float 3s ease-in-out infinite;position:relative;z-index:2;filter:drop-shadow(0 6px 14px rgba(0,0,0,.1))"/>
+
+    <div style="font-family:'Dancing Script',cursive;font-size:clamp(1.5rem,6vw,2.1rem);color:#c0392b;text-align:center;position:relative;z-index:2;line-height:1.4">
+      Are you happy? 🥹
+    </div>
+
+    <div style="display:flex;gap:16px;position:relative;z-index:2;margin-top:4px">
+      <!-- YES = correct = static, goes to mcq2 -->
+      <button class="pbtn" onclick="playCorrect();goTo('mcq2')">YES</button>
+      <!-- NO = wrong = runs away, then wrong page → restart -->
+      <button class="pbtn" id="noBtn_m1"
+              onmouseenter="runAwayBtn(event,'noBtn_m1')"
+              onclick="showWrong()">NO</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     MCQ 2 — Next gift chahiye?
+     CORRECT = NO  → next
+     WRONG   = YES → why no → restart
+════════════════════════════ -->
+<div id="mcq2" class="page">
+  <svg class="heart-bg" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid meet">
+    <path d="M200 330 C130 285 40 230 40 140 C40 90 75 55 115 68 C145 78 200 110 200 110
+             C200 110 255 78 285 68 C325 55 360 90 360 140 C360 230 270 285 200 330Z"
+          fill="#f5b8c0" opacity=".35"/>
+  </svg>
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0" id="fhc_m2"></div>
+
+  <div class="pw">
+    <img src="fisrt screen.webp" alt="Dudu Bubu"
+         style="width:min(220px,65vw);height:auto;animation:float 3s ease-in-out infinite .2s;position:relative;z-index:2;filter:drop-shadow(0 6px 14px rgba(0,0,0,.1))"/>
+
+    <div style="font-family:'Dancing Script',cursive;font-size:clamp(1.5rem,6vw,2.1rem);color:#c0392b;text-align:center;position:relative;z-index:2;line-height:1.4">
+      Do you want your next gift? 🎁
+    </div>
+
+    <div style="display:flex;gap:16px;position:relative;z-index:2;margin-top:4px">
+      <!-- YES = wrong = runs away → wrong page → restart -->
+      <button class="pbtn" id="yesBtn_m2"
+              onmouseenter="runAwayBtn(event,'yesBtn_m2')"
+              onclick="showWrong()">YES</button>
+      <!-- NO = correct = static → goes to mcq3 -->
+      <button class="pbtn" onclick="playCorrect();goTo('mcq3')">NO</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     MCQ 3 — Ghusa ho?
+     CORRECT = NO  → birthday page
+     WRONG   = YES → why no → restart
+════════════════════════════ -->
+<div id="mcq3" class="page">
+  <svg class="heart-bg" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid meet">
+    <path d="M200 330 C130 285 40 230 40 140 C40 90 75 55 115 68 C145 78 200 110 200 110
+             C200 110 255 78 285 68 C325 55 360 90 360 140 C360 230 270 285 200 330Z"
+          fill="#f5b8c0" opacity=".35"/>
+  </svg>
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0" id="fhc_m3"></div>
+
+  <div class="pw">
+    <img src="fisrt screen.webp" alt="Dudu Bubu"
+         style="width:min(220px,65vw);height:auto;animation:float 3s ease-in-out infinite .4s;position:relative;z-index:2;filter:drop-shadow(0 6px 14px rgba(0,0,0,.1))"/>
+
+    <div style="font-family:'Dancing Script',cursive;font-size:clamp(1.5rem,6vw,2.1rem);color:#c0392b;text-align:center;position:relative;z-index:2;line-height:1.4">
+      Are you angry at me? 😤
+    </div>
+
+    <div style="display:flex;gap:16px;position:relative;z-index:2;margin-top:4px">
+      <!-- YES = wrong = runs away → wrong page → restart -->
+      <button class="pbtn" id="yesBtn_m3"
+              onmouseenter="runAwayBtn(event,'yesBtn_m3')"
+              onclick="showWrong()">YES</button>
+      <!-- NO = correct = static → birthday page -->
+      <button class="pbtn" onclick="playCorrect();goTo('p3')">NO</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     PAGE 3 — HAPPY BIRTHDAY
+     Simple, pretty, full screen pink card
+════════════════════════════ -->
+<div id="p3" class="page" style="
+  background:linear-gradient(160deg,#fce4ec 0%,#f8bbd0 40%,#e1bee7 100%);
+  overflow:hidden;padding:0;
+">
+  <!-- Floating hearts same as page 1 -->
+  <div id="fhc3" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0"></div>
+
+  <!-- Decorative circles background -->
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden">
+    <div style="position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.18)"></div>
+    <div style="position:absolute;bottom:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.18)"></div>
+    <div style="position:absolute;top:30%;left:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.12)"></div>
+    <div style="position:absolute;top:20%;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.12)"></div>
+  </div>
+
+  <!-- Twinkling stars -->
+  <span style="position:absolute;top:5%;left:6%;font-size:1.4rem;color:#e91e8c;opacity:.5;animation:twinkle 1.8s ease-in-out infinite;z-index:1">✦</span>
+  <span style="position:absolute;top:8%;right:8%;font-size:1rem;color:#9b59b6;opacity:.5;animation:twinkle 1.8s ease-in-out infinite .4s;z-index:1">✦</span>
+  <span style="position:absolute;top:18%;left:3%;font-size:.8rem;color:#e91e8c;opacity:.4;animation:twinkle 1.8s ease-in-out infinite .9s;z-index:1">★</span>
+  <span style="position:absolute;top:15%;right:5%;font-size:1.1rem;color:#f8c300;opacity:.5;animation:twinkle 1.8s ease-in-out infinite .2s;z-index:1">✦</span>
+  <span style="position:absolute;bottom:28%;left:5%;font-size:1rem;color:#9b59b6;opacity:.4;animation:twinkle 1.8s ease-in-out infinite .7s;z-index:1">★</span>
+  <span style="position:absolute;bottom:25%;right:6%;font-size:.9rem;color:#e91e8c;opacity:.5;animation:twinkle 1.8s ease-in-out infinite .3s;z-index:1">✦</span>
+
+  <!-- Center content -->
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;padding:24px 20px;gap:0">
+
+    <!-- Top small tag -->
+    <div style="font-size:.72rem;font-weight:700;color:#9b59b6;letter-spacing:1.5px;text-transform:uppercase;border:1.5px solid rgba(155,89,182,.4);border-radius:20px;padding:5px 16px;background:rgba(255,255,255,.6);margin-bottom:18px">
+      ♥ A surprise just for you
+    </div>
+
+    <!-- ♡ happy ♡ -->
+    <div style="
+      font-family:'Dancing Script',cursive;
+      font-size:clamp(2.4rem,10vw,4.2rem);
+      color:#e91e8c;
+      line-height:1.05;
+      text-align:center;
+      animation:pulse 2.2s ease-in-out infinite;
+      letter-spacing:3px;
+      text-shadow:0 2px 20px rgba(233,30,140,.3);
+    ">♡ happy ♡</div>
+
+    <!-- Birthday — big bold -->
+    <div style="
+      font-family:'Dancing Script',cursive;
+      font-size:clamp(4.5rem,18vw,8rem);
+      color:#e91e8c;
+      line-height:.9;
+      text-align:center;
+      animation:pulse 2.2s ease-in-out infinite .2s;
+      text-shadow:0 4px 30px rgba(233,30,140,.35);
+      letter-spacing:2px;
+      margin-top:-4px;
+    ">Birthday</div>
+
+    <!-- Decorative divider -->
+    <div style="display:flex;align-items:center;gap:10px;margin:16px 0 10px;width:80%;max-width:280px">
+      <div style="flex:1;height:1.5px;background:linear-gradient(to right,transparent,#e91e8c88)"></div>
+      <span style="color:#e91e8c;font-size:1rem">♡</span>
+      <div style="flex:1;height:1.5px;background:linear-gradient(to left,transparent,#e91e8c88)"></div>
+    </div>
+
+    <!-- Zainab name -->
+    <div style="
+      font-family:'Dancing Script',cursive;
+      font-size:clamp(1.8rem,7vw,3rem);
+      color:#9b59b6;
+      text-align:center;
+      animation:float 3s ease-in-out infinite;
+      text-shadow:0 2px 12px rgba(155,89,182,.3);
+    ">Zainab ♡</div>
+
+    <!-- CLICK ME button -->
+    <button onclick="goToFinal()" style="
+      margin-top:28px;
+      background:linear-gradient(135deg,#e91e8c,#9b59b6);
+      border:none;border-radius:50px;
+      padding:13px 36px;color:#fff;
+      font-family:'Nunito',sans-serif;font-weight:900;font-size:.95rem;
+      letter-spacing:1.5px;cursor:pointer;
+      animation:hbeat 1.3s ease-in-out infinite;
+      box-shadow:0 6px 24px rgba(233,30,140,.4);
+    ">✦ CLICK ME ✦</button>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     PAGE 4 — FINAL BIRTHDAY CARD
+════════════════════════════ -->
+<div id="p4" class="page">
+  <div class="flower-c" style="top:10px;left:10px">🌸</div>
+  <div class="flower-c" style="top:10px;right:10px;animation-delay:.5s">🌼</div>
+
+  <div class="final-wrap">
+    <div class="fc">
+
+      <!-- avatar -->
+      <div class="av-ring">
+        <img src="dudu.jpg" alt="Dudu" style="object-fit:contain"/>
+      </div>
+
+      <div class="only-tag">♥ Only for you..</div>
+      <div class="fc-title">Happy Birthday</div>
+      <div class="fc-sub">My Dear Sister! ♡</div>
+      <div class="divider">✦</div>
+
+      <p class="fc-msg">
+        Today is your special day, and I just want you to know
+        how lucky I am to have you in my life. You are not just
+        my sister, but also a beautiful part of my world. Your
+        smile brings happiness, and your presence makes life
+        more special.<br><br>
+        May Allah bless you with endless happiness, good health,
+        success, and peace. May all your dreams come true, every
+        prayer be answered, and every new day bring something
+        beautiful into your life.<br><br>
+        Always keep smiling, keep shining, and never stop being
+        the amazing person you are. No matter how much time
+        passes, you will always have a special place in my heart.<br><br>
+        Stay happy, stay blessed, and keep smiling forever!
+      </p>
+
+      <div class="divider">✦</div>
+
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%">
+        <img src="bubu.jpg" alt="Bubu"
+             style="width:52px;height:52px;object-fit:contain;animation:float 2.5s ease-in-out infinite;filter:drop-shadow(0 3px 6px rgba(0,0,0,.1))"/>
+        <div style="text-align:center">
+          <p style="font-family:'Dancing Script',cursive;font-size:.92rem;color:#e91e8c;line-height:1.5">With lots of love,</p>
+          <p style="font-family:'Dancing Script',cursive;font-size:1.1rem;color:#9b59b6;font-weight:700">Your Brother Sameer ❤️</p>
+        </div>
+        <img src="dudu.jpg" alt="Dudu"
+             style="width:52px;height:52px;object-fit:contain;animation:float 2.5s ease-in-out infinite .3s;filter:drop-shadow(0 3px 6px rgba(0,0,0,.1))"/>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Confetti -->
+<canvas id="cnv"></canvas>
+
+<!-- Audio 1: tune.mpeg — plays on page load (intro music) -->
+<audio id="tune" loop>
+  <source src="tune.mpeg" type="audio/mpeg"/>
+</audio>
+
+<!-- Audio 2: song.mp4 — plays when CLICK ME pressed (final card) -->
+<audio id="aud" loop>
+  <source src="song.mp4" type="video/mp4"/>
+</audio>
+
+<script>
+/* ── PAGE TRANSITIONS ── */
+let lastMcq = 'mcq1'; // track which MCQ to return to after "why no"
+
+function goTo(id){
+  stopWrong();
+  stopCorrect(); // stop correct sound when moving to next page
+  const c=document.querySelector('.page.active');
+  if(c){c.classList.add('exit');setTimeout(()=>c.classList.remove('active','exit'),450)}
+  setTimeout(()=>{
+    const n=document.getElementById(id);
+    n.classList.add('active');
+    if(id==='p1'){resetType();resetNo();}
+    if(id==='p3'){startTune();}
+    else{stopTune();}
+  },300)
+}
+function goToFinal(){
+  goTo('p4');
+  setTimeout(()=>{ autoPlay(); boom(); },600);
+}
+
+// Show "why no" page — wrong answer, TRY AGAIN restarts from page 1
+function showWrong(){
+  const c=document.querySelector('.page.active');
+  if(c){c.classList.add('exit');setTimeout(()=>c.classList.remove('active','exit'),450)}
+  setTimeout(()=>{
+    document.getElementById('p2').classList.add('active');
+    playWrong(); // start wronganswer.mpeg
+  },300);
+}
+
+function goBackToMcq(){
+  stopWrong(); // stop wronganswer.mpeg
+  const c=document.querySelector('.page.active');
+  if(c){c.classList.add('exit');setTimeout(()=>c.classList.remove('active','exit'),450)}
+  setTimeout(()=>{
+    document.getElementById('p1').classList.add('active');
+    resetType();
+    resetNo();
+    ['noBtn_m1','yesBtn_m2','yesBtn_m3'].forEach(id=>{
+      const b=document.getElementById(id);
+      if(b){b.style.position='';b.style.left='';b.style.top='';b.style.zIndex='';}
+    });
+  },300);
+}
+
+/* ── TYPING ANIMATION ── */
+const LINES=['I made something','I made something special for u\ndo u wanna see it?'];
+let ci=0,ph=0,tt;
+const tb=document.getElementById('tbox');
+const br=document.getElementById('brow');
+
+function resetType(){
+  clearTimeout(tt);ci=0;ph=0;
+  tb.innerHTML='';br.style.opacity='0';
+  setTimeout(typeStep,200)
+}
+function typeStep(){
+  const t=LINES[ph];
+  if(ci<t.length){
+    tb.innerHTML=t.slice(0,ci+1).replace(/\n/g,'<br>')+'<span class="cblink"></span>';
+    ci++;tt=setTimeout(typeStep,ci===1?350:70)
+  }else{
+    tb.innerHTML=t.replace(/\n/g,'<br>')+'<span class="cblink"></span>';
+    if(ph===0){tt=setTimeout(()=>{ph=1;typeStep()},950)}
+    else{setTimeout(()=>{br.style.opacity='1'},400)}
+  }
+}
+typeStep();
+
+/* ── NO BTN RUNS AWAY (generic — works for any button id) ── */
+let nm=0;
+function runAway(e){
+  if(nm>=6)return;nm++;
+  const b=document.getElementById('noBtn');
+  moveBtn(b,e);
+}
+function runAwayBtn(e,btnId){
+  const b=document.getElementById(btnId);
+  if(!b)return;
+  moveBtn(b,e);
+}
+function moveBtn(b,e){
+  const vw=innerWidth,vh=innerHeight;
+  const bw=b.offsetWidth,bh=b.offsetHeight;
+  const r=b.getBoundingClientRect();
+  const ang=Math.atan2(r.top+bh/2-e.clientY,r.left+bw/2-e.clientX);
+  const d=160+Math.random()*100;
+  let nx=r.left+Math.cos(ang)*d, ny=r.top+Math.sin(ang)*d;
+  nx=Math.max(0,Math.min(vw-bw,nx));
+  ny=Math.max(0,Math.min(vh-bh,ny));
+  b.style.cssText+=`position:fixed;left:${nx}px;top:${ny}px;z-index:200;transition:left .2s,top .2s`
+}
+function resetNo(){
+  const b=document.getElementById('noBtn');
+  b.style.position='';b.style.left='';b.style.top='';b.style.zIndex='';nm=0
+}
+
+/* ── FLOATING HEARTS ── */
+['fhc','fhc2','fhc3','fhc_m1','fhc_m2','fhc_m3'].forEach(id=>{
+  const c=document.getElementById(id);
+  for(let i=0;i<12;i++){
+    const h=document.createElement('div');
+    h.className='fh';h.textContent='♡';
+    h.style.cssText=`left:${Math.random()*100}vw;font-size:${.9+Math.random()*.8}rem;animation-duration:${8+Math.random()*9}s;animation-delay:${-Math.random()*15}s`;
+    c.appendChild(h)
+  }
+});
+
+/* ── MUSIC ── */
+const tune = document.getElementById('tune');
+const aud  = document.getElementById('aud');
+
+// wronganswer.mpeg — create dynamically
+const wrongSnd = new Audio('wronganswer.mpeg');
+wrongSnd.loop = true;
+
+// correct answer.mpeg — play once on correct answer
+const correctSnd = new Audio('correct answer.mpeg');
+correctSnd.loop = false;
+
+function playCorrect(){
+  correctSnd.currentTime = 0;
+  correctSnd.play().catch(()=>{});
+}
+function stopCorrect(){
+  correctSnd.pause();
+  correctSnd.currentTime = 0;
+}
+
+// Play wrong sound when page 2 shown, stop when leaving
+function playWrong(){
+  wrongSnd.currentTime = 0;
+  wrongSnd.play().catch(()=>{});
+}
+function stopWrong(){
+  wrongSnd.pause();
+  wrongSnd.currentTime = 0;
+}
+
+// tune.mpeg — sirf page 3 par chale
+function startTune(){
+  tune.currentTime = 0;
+  tune.play().catch(()=>{});
+}
+function stopTune(){
+  tune.pause();
+  tune.currentTime = 0;
+}
+
+// song.mp4 — final card par chale, tune band kar ke
+function autoPlay(){
+  stopTune();
+  aud.play().catch(()=>{
+    document.addEventListener('click', ()=>aud.play(), {once:true});
+  });
+}
+
+/* ── CONFETTI ── */
+const cnv=document.getElementById('cnv');
+const ctx=cnv.getContext('2d');
+let pcs=[],run=false;
+function boom(){
+  cnv.style.display='block';
+  cnv.width=innerWidth;cnv.height=innerHeight;
+  pcs=[];
+  const cols=['#e91e8c','#f8bbd0','#9b59b6','#f39c12','#3498db','#2ecc71','#f1c40f','#e74c3c'];
+  for(let i=0;i<150;i++)pcs.push({
+    x:Math.random()*cnv.width,
+    y:Math.random()*cnv.height-cnv.height,
+    w:7+Math.random()*9,h:4+Math.random()*5,
+    c:cols[i%cols.length],
+    sp:2.5+Math.random()*4,
+    ang:Math.random()*Math.PI*2,
+    spin:(Math.random()-.5)*.18,
+    dr:(Math.random()-.5)*1.4
+  });
+  run=true;animC();
+  setTimeout(()=>{run=false;setTimeout(()=>{cnv.style.display='none'},800)},4500)
+}
+function animC(){
+  if(!run&&pcs.every(p=>p.y>cnv.height))return;
+  ctx.clearRect(0,0,cnv.width,cnv.height);
+  pcs.forEach(p=>{
+    p.y+=p.sp;p.x+=p.dr;p.ang+=p.spin;
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.ang);
+    ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+    ctx.restore()
+  });
+  requestAnimationFrame(animC)
+}
+window.addEventListener('resize',()=>{cnv.width=innerWidth;cnv.height=innerHeight});
+</script>
+</body>
+</html>
+<!-- wronganswer audio — injected via JS -->
